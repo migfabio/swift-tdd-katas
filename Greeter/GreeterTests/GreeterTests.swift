@@ -11,9 +11,13 @@ import XCTest
 
 class Greeter {
     func greet(_ name: String) -> String {
-        let allCharactersExcludingFirstRange = name.index(name.startIndex, offsetBy: 1)..<name.endIndex
-        let outputName = String(name[name.startIndex]).capitalized + String(name[allCharactersExcludingFirstRange])
-        return "Hello \(outputName.trimmingCharacters(in: .whitespaces))"
+        return "Hello \(name.trimmingCharacters(in: .whitespaces).capitalizeFirstLetter())"
+    }
+}
+
+extension String {
+    func capitalizeFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
     }
 }
 
