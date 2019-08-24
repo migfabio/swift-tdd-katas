@@ -2,9 +2,7 @@
 
 What does _kata_ mean? According to Wikipedia:
 
-```
-Kata, a Japanese word, meaning literally: "form" (型 or 形), is a detailed choreographed pattern of movements made to be practiced alone, but are also practiced within groups and in unison when training. It is practiced as a way to memorize and perfect the movement being executed.
-```
+> Kata, a Japanese word, meaning literally: "form" (型 or 形), is a detailed choreographed pattern of movements made to be practiced alone, but are also practiced within groups and in unison when training. It is practiced as a way to memorize and perfect the movement being executed.
 
 The idea of kata for software development was originally coined by Dave Thomas (co-author of [The Pragmatic Programmer](https://www.amazon.co.uk/dp/020161622X/ref=cm_sw_em_r_mt_dp_U_nzvyDbJTKJR59)) and it's the same as in martial arts, practice and repetition to hone the skills and lock in the patterns.
 
