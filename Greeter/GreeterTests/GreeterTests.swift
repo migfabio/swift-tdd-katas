@@ -17,14 +17,14 @@ class Greeter {
 
 class GreeterTests: XCTestCase {
 
+    let sut = Greeter()
+
     func test_greet_withNameAsInput_shoulReturnHelloName() {
-        let sut = Greeter()
         XCTAssertEqual(sut.greet("Fabio"), "Hello Fabio")
         XCTAssertEqual(sut.greet("Jenny"), "Hello Jenny")
     }
 
     func test_greet_withNameWithWhitespaces_shouldReturnHelloNameWithoutWhitespaces() {
-        let sut = Greeter()
         XCTAssertEqual(sut.greet("  Fabio  "), "Hello Fabio")
     }
 }
