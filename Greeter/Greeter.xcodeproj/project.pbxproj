@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E5316BAE231191FB00CED2CD /* Greeter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5316BA4231191FA00CED2CD /* Greeter.framework */; };
+		E5316BBF2311938F00CED2CD /* GreeterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5316BBE2311938F00CED2CD /* GreeterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +26,7 @@
 		E5316BA8231191FA00CED2CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5316BAD231191FB00CED2CD /* GreeterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreeterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5316BB4231191FB00CED2CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5316BBE2311938F00CED2CD /* GreeterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreeterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				E5316BB4231191FB00CED2CD /* Info.plist */,
+				E5316BBE2311938F00CED2CD /* GreeterTests.swift */,
 			);
 			path = GreeterTests;
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 					};
 					E5316BAC231191FB00CED2CD = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 					};
 				};
 			};
@@ -195,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5316BBF2311938F00CED2CD /* GreeterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +382,7 @@
 		E5316BBC231191FB00CED2CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = GreeterTests/Info.plist;
@@ -387,6 +393,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fabiomignogna.GreeterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -394,6 +401,7 @@
 		E5316BBD231191FB00CED2CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = GreeterTests/Info.plist;
