@@ -6,69 +6,8 @@
 //  Copyright © 2019 Fabio Mignogna. All rights reserved.
 //
 
-import Foundation
 import XCTest
-
-class Greeter {
-    private let date: Date?
-    
-    init(date: Date? = nil) {
-        self.date = date
-    }
-    
-    func greet(_ name: String) -> String {
-        var greetingMessage = "Hello"
-        if let date = date {
-            if date >= Date.todaySixAM && date < Date.todayNoon {
-                greetingMessage = "Good morning"
-            } else if date >= Date.todaySixPM && date < Date.todayTenPM {
-                greetingMessage = "Good evening"
-            } else if date >= Date.todayTenPM && date < Date.tomorrowSixAM {
-                greetingMessage = "Good night"
-            }
-        }
-        
-        return "\(greetingMessage) \(name.trimmingCharacters(in: .whitespaces).capitalizeFirstLetter())"
-    }
-}
-
-extension String {
-    func capitalizeFirstLetter() -> String {
-        return prefix(1).capitalized + dropFirst()
-    }
-}
-
-extension Date {
-    static var today: Date {
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.startOfDay(for: Date())
-    }
-    
-    static var todaySixAM: Date {
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.date(bySetting: .hour, value: 06, of: today)!
-    }
-    
-    static var todayNoon: Date {
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.date(bySetting: .hour, value: 12, of: today)!
-    }
-    
-    static var todaySixPM: Date {
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.date(bySetting: .hour, value: 18, of: today)!
-    }
-    
-    static var todayTenPM: Date {
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.date(bySetting: .hour, value: 22, of: today)!
-    }
-    
-    static var tomorrowSixAM: Date {
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.date(byAdding: .day, value: 1, to: todaySixAM)!
-    }
-}
+import Greeter
 
 class GreeterTests: XCTestCase {
 
@@ -126,13 +65,13 @@ class GreeterTests: XCTestCase {
             let calendar = Calendar(identifier: .gregorian)
             switch self {
             case .sixAM:
-                return Date.todaySixAM
+                return calendar.date(bySetting: .hour, value: 06, of: today)!
             case .noon:
-                return Date.todayNoon
+                return calendar.date(bySetting: .hour, value: 12, of: today)!
             case .sixPM:
-                return Date.todaySixPM
+                return calendar.date(bySetting: .hour, value: 18, of: today)!
             case .tenPM:
-                return Date.todayTenPM
+                return calendar.date(bySetting: .hour, value: 22, of: today)!
             case .customHourAndMinute(let hour, let minute, let nextDay):
                 let customDate = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: today)!
                 return nextDay ? calendar.date(byAdding: .day, value: 1, to: customDate)! : customDate

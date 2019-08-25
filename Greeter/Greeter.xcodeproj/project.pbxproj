@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		E5316BAE231191FB00CED2CD /* Greeter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5316BA4231191FA00CED2CD /* Greeter.framework */; };
 		E5316BBF2311938F00CED2CD /* GreeterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5316BBE2311938F00CED2CD /* GreeterTests.swift */; };
+		E5316BC32312CAEC00CED2CD /* String+GreeterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5316BC22312CAEC00CED2CD /* String+GreeterExtensions.swift */; };
+		E5316BC52312CAFF00CED2CD /* Date+GreeterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5316BC42312CAFF00CED2CD /* Date+GreeterExtensions.swift */; };
+		E5316BC72312CE1F00CED2CD /* Greeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5316BC02312CAC800CED2CD /* Greeter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +30,9 @@
 		E5316BAD231191FB00CED2CD /* GreeterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GreeterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5316BB4231191FB00CED2CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5316BBE2311938F00CED2CD /* GreeterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreeterTests.swift; sourceTree = "<group>"; };
+		E5316BC02312CAC800CED2CD /* Greeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Greeter.swift; sourceTree = "<group>"; };
+		E5316BC22312CAEC00CED2CD /* String+GreeterExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+GreeterExtensions.swift"; sourceTree = "<group>"; };
+		E5316BC42312CAFF00CED2CD /* Date+GreeterExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+GreeterExtensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +75,8 @@
 		E5316BA6231191FA00CED2CD /* Greeter */ = {
 			isa = PBXGroup;
 			children = (
+				E5316BC02312CAC800CED2CD /* Greeter.swift */,
+				E5316BC62312CD2000CED2CD /* Extensions */,
 				E5316BA8231191FA00CED2CD /* Info.plist */,
 			);
 			path = Greeter;
@@ -77,10 +85,19 @@
 		E5316BB1231191FB00CED2CD /* GreeterTests */ = {
 			isa = PBXGroup;
 			children = (
-				E5316BB4231191FB00CED2CD /* Info.plist */,
 				E5316BBE2311938F00CED2CD /* GreeterTests.swift */,
+				E5316BB4231191FB00CED2CD /* Info.plist */,
 			);
 			path = GreeterTests;
+			sourceTree = "<group>";
+		};
+		E5316BC62312CD2000CED2CD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E5316BC22312CAEC00CED2CD /* String+GreeterExtensions.swift */,
+				E5316BC42312CAFF00CED2CD /* Date+GreeterExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +161,7 @@
 				TargetAttributes = {
 					E5316BA3231191FA00CED2CD = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 					};
 					E5316BAC231191FB00CED2CD = {
 						CreatedOnToolsVersion = 11.0;
@@ -192,6 +210,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5316BC32312CAEC00CED2CD /* String+GreeterExtensions.swift in Sources */,
+				E5316BC52312CAFF00CED2CD /* Date+GreeterExtensions.swift in Sources */,
+				E5316BC72312CE1F00CED2CD /* Greeter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +357,7 @@
 		E5316BB9231191FB00CED2CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -352,6 +374,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.fabiomignogna.Greeter;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -359,6 +382,7 @@
 		E5316BBA231191FB00CED2CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -382,6 +406,7 @@
 		E5316BBC231191FB00CED2CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -401,6 +426,7 @@
 		E5316BBD231191FB00CED2CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
