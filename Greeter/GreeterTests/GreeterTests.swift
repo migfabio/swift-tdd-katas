@@ -23,6 +23,8 @@ class Greeter {
             let hour = calendar.component(.hour, from: date)
             if hour >= 6 && hour <= 12 {
                 greetingMessage = "Good morning"
+            } else if hour >= 18 && hour <= 22 {
+                greetingMessage = "Good evening"
             }
         }
         
@@ -53,16 +55,29 @@ class GreeterTests: XCTestCase {
         XCTAssertEqual(sut.greet("fabio"), "Hello Fabio")
     }
     
-    func test_greet_withNameAsInput_whenTimeIsBetween06amTo12pm_shouldReturnGoodMorningName() {
+    func test_greet_withNameAsInput_whenTimeIsBetween06amToNoon_shouldReturnGoodMorningName() {
         let calendar = Calendar(identifier: .gregorian)
         let sixAm = calendar.date(bySetting: .hour, value: 06, of: Date())
         var sut = Greeter(date: sixAm)
         
         XCTAssertEqual(sut.greet("Fabio"), "Good morning Fabio")
         
-        let twelvePm = calendar.date(bySetting: .hour, value: 12, of: Date())
-        sut = Greeter(date: twelvePm)
+        let noon = calendar.date(bySetting: .hour, value: 12, of: Date())
+        sut = Greeter(date: noon)
         
         XCTAssertEqual(sut.greet("Fabio"), "Good morning Fabio")
+    }
+    
+    func test_greet_withNameAsInput_whenTimeIsBetween06pmTo10pm_shouldReturnGoodEveningName() {
+        let calendar = Calendar(identifier: .gregorian)
+        let sixPm = calendar.date(bySetting: .hour, value: 18, of: Date())
+        var sut = Greeter(date: sixPm)
+        
+        XCTAssertEqual(sut.greet("Fabio"), "Good evening Fabio")
+        
+        let tenPm = calendar.date(bySetting: .hour, value: 22, of: Date())
+        sut = Greeter(date: tenPm)
+        
+        XCTAssertEqual(sut.greet("Fabio"), "Good evening Fabio")
     }
 }
