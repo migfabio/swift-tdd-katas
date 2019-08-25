@@ -100,6 +100,10 @@ class GreeterTests: XCTestCase {
         XCTAssertEqual(makeSUT(with: .customHourAndMinute(hour: 5, minute: 59, nextDay: true)).greet("Fabio"), "Good night Fabio")
     }
     
+    func test_greet_withNameAsInput_whenTimeIsNoon_shouldReturnHelloName() {
+        XCTAssertEqual(makeSUT(with: .noon).greet("Fabio"), "Hello Fabio")
+    }
+    
     // MARK: - Helper
     
     private func makeSUT(with dateTime: DateTime? = nil) -> Greeter {
