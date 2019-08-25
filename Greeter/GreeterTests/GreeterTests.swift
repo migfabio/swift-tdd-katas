@@ -10,36 +10,6 @@ import Foundation
 import XCTest
 
 class Greeter {
-    private var today: Date {
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.startOfDay(for: Date())
-    }
-    
-    private var todaySixAm: Date {
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.date(bySetting: .hour, value: 06, of: today)!
-    }
-    
-    private var todayNoon: Date {
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.date(bySetting: .hour, value: 12, of: today)!
-    }
-    
-    private var todaySixPm: Date {
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.date(bySetting: .hour, value: 18, of: today)!
-    }
-    
-    private var todayTenPm: Date {
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.date(bySetting: .hour, value: 22, of: today)!
-    }
-    
-    private var tomorrowSixAm: Date {
-        let calendar = Calendar(identifier: .gregorian)
-        return calendar.date(byAdding: .day, value: 1, to: todaySixAm)!
-    }
-    
     private let date: Date?
     
     init(date: Date? = nil) {
@@ -49,11 +19,11 @@ class Greeter {
     func greet(_ name: String) -> String {
         var greetingMessage = "Hello"
         if let date = date {
-            if date >= todaySixAm && date < todayNoon {
+            if date >= Date.todaySixAM && date < Date.todayNoon {
                 greetingMessage = "Good morning"
-            } else if date >= todaySixPm && date < todayTenPm {
+            } else if date >= Date.todaySixPM && date < Date.todayTenPM {
                 greetingMessage = "Good evening"
-            } else if date >= todayTenPm && date < tomorrowSixAm {
+            } else if date >= Date.todayTenPM && date < Date.tomorrowSixAM {
                 greetingMessage = "Good night"
             }
         }
@@ -65,6 +35,38 @@ class Greeter {
 extension String {
     func capitalizeFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
+    }
+}
+
+extension Date {
+    static var today: Date {
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.startOfDay(for: Date())
+    }
+    
+    static var todaySixAM: Date {
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.date(bySetting: .hour, value: 06, of: today)!
+    }
+    
+    static var todayNoon: Date {
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.date(bySetting: .hour, value: 12, of: today)!
+    }
+    
+    static var todaySixPM: Date {
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.date(bySetting: .hour, value: 18, of: today)!
+    }
+    
+    static var todayTenPM: Date {
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.date(bySetting: .hour, value: 22, of: today)!
+    }
+    
+    static var tomorrowSixAM: Date {
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.date(byAdding: .day, value: 1, to: todaySixAM)!
     }
 }
 
@@ -116,20 +118,20 @@ class GreeterTests: XCTestCase {
             return calendar.startOfDay(for: Date())
         }
         
-        var date: Date? {
+        var date: Date {
             let calendar = Calendar(identifier: .gregorian)
             switch self {
             case .sixAM:
-                return calendar.date(bySetting: .hour, value: 06, of: today)
+                return Date.todaySixAM
             case .noon:
-                return calendar.date(bySetting: .hour, value: 12, of: today)
+                return Date.todayNoon
             case .sixPM:
-                return calendar.date(bySetting: .hour, value: 18, of: today)
+                return Date.todaySixPM
             case .tenPM:
-                return calendar.date(bySetting: .hour, value: 22, of: today)
+                return Date.todayTenPM
             case .customHourAndMinute(let hour, let minute, let nextDay):
-                let customDate = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: today)
-                return nextDay ? calendar.date(byAdding: .day, value: 1, to: customDate!) : customDate
+                let customDate = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: today)!
+                return nextDay ? calendar.date(byAdding: .day, value: 1, to: customDate)! : customDate
             }
         }
     }
