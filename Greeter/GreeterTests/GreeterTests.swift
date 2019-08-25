@@ -40,44 +40,53 @@ extension String {
 
 class GreeterTests: XCTestCase {
 
-    let sut = Greeter()
-
     func test_greet_withNameAsInput_shouldReturnHelloName() {
-        XCTAssertEqual(sut.greet("Fabio"), "Hello Fabio")
-        XCTAssertEqual(sut.greet("Jenny"), "Hello Jenny")
+        XCTAssertEqual(makeSUT().greet("Fabio"), "Hello Fabio")
+        XCTAssertEqual(makeSUT().greet("Jenny"), "Hello Jenny")
     }
 
     func test_greet_withNameWithWhitespacesAsInput_shouldReturnHelloNameWithoutWhitespaces() {
-        XCTAssertEqual(sut.greet("  Fabio  "), "Hello Fabio")
+        XCTAssertEqual(makeSUT().greet("  Fabio  "), "Hello Fabio")
     }
     
     func test_greet_withNameAsInput_shouldCapitalizeTheFirstLetterOfTheName() {
-        XCTAssertEqual(sut.greet("fabio"), "Hello Fabio")
+        XCTAssertEqual(makeSUT().greet("fabio"), "Hello Fabio")
     }
     
     func test_greet_withNameAsInput_whenTimeIsBetween06amToNoon_shouldReturnGoodMorningName() {
-        let calendar = Calendar(identifier: .gregorian)
-        let sixAm = calendar.date(bySetting: .hour, value: 06, of: Date())
-        var sut = Greeter(date: sixAm)
-        
-        XCTAssertEqual(sut.greet("Fabio"), "Good morning Fabio")
-        
-        let noon = calendar.date(bySetting: .hour, value: 12, of: Date())
-        sut = Greeter(date: noon)
-        
-        XCTAssertEqual(sut.greet("Fabio"), "Good morning Fabio")
+        XCTAssertEqual(makeSUT(with: .sixAM).greet("Fabio"), "Good morning Fabio")
+        XCTAssertEqual(makeSUT(with: .noon).greet("Fabio"), "Good morning Fabio")
     }
     
     func test_greet_withNameAsInput_whenTimeIsBetween06pmTo10pm_shouldReturnGoodEveningName() {
-        let calendar = Calendar(identifier: .gregorian)
-        let sixPm = calendar.date(bySetting: .hour, value: 18, of: Date())
-        var sut = Greeter(date: sixPm)
+        XCTAssertEqual(makeSUT(with: .sixPM).greet("Fabio"), "Good evening Fabio")
+        XCTAssertEqual(makeSUT(with: .tenPM).greet("Fabio"), "Good evening Fabio")
+    }
+    
+    // MARK: - Helper
+    
+    private func makeSUT(with dateTime: DateTime? = nil) -> Greeter {
+        return Greeter(date: dateTime?.date)
+    }
+    
+    private enum DateTime {
+        case sixAM
+        case noon
+        case sixPM
+        case tenPM
         
-        XCTAssertEqual(sut.greet("Fabio"), "Good evening Fabio")
-        
-        let tenPm = calendar.date(bySetting: .hour, value: 22, of: Date())
-        sut = Greeter(date: tenPm)
-        
-        XCTAssertEqual(sut.greet("Fabio"), "Good evening Fabio")
+        var date: Date? {
+            let calendar = Calendar(identifier: .gregorian)
+            switch self {
+            case .sixAM:
+                return calendar.date(bySetting: .hour, value: 06, of: Date())
+            case .noon:
+                return calendar.date(bySetting: .hour, value: 12, of: Date())
+            case .sixPM:
+                return calendar.date(bySetting: .hour, value: 18, of: Date())
+            case .tenPM:
+                return calendar.date(bySetting: .hour, value: 22, of: Date())
+            }
+        }
     }
 }
