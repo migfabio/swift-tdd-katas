@@ -10,13 +10,9 @@ import XCTest
 
 class StringCalculator {
     func add(_ input: String) -> Int {
-        let values = input.split { (char) -> Bool in
-            char == "," || char == "\n"
-        }
-        let sum = values.reduce(0) { (acc, value) -> Int in
-            return acc + (Int(value.trimmingCharacters(in: .whitespaces)) ?? 0)
-        }
-        return sum
+        let intValues = input.split { $0 == "," || $0 == "\n" }
+            .map { Int($0.trimmingCharacters(in: .whitespaces)) ?? 0 }
+        return intValues.reduce(0, +)
     }
 }
 
