@@ -22,16 +22,26 @@ enum StringCalculatorError: Error, LocalizedError {
 class StringCalculator {
     
     func add(_ input: String) throws -> Int {
-        let intValues: [Int] = input.split {
-            $0 == "," || $0 == "\n"
-        }.compactMap {
+        var separator = ","
+        if input.hasPrefix("//") {
+            separator = String(input[input.index(input.startIndex, offsetBy: 2)])
+        }
+        
+        let stringValues: [Substring] = input.split {
+            String($0) == separator || String($0) == "\n"
+        }
+        
+        let intValues: [Int] = stringValues.compactMap {
             let value = Int($0.trimmingCharacters(in: .whitespaces)) ?? 0
             return value <= 1000 ? value : nil
         }
+        
         let negativeNumbers = intValues.filter({ $0 < 0 })
+        
         guard negativeNumbers.isEmpty else {
             throw StringCalculatorError.nonNegativeNumber(numbers: negativeNumbers)
         }
+        
         return intValues.reduce(0, +)
     }
 }
@@ -79,5 +89,9 @@ class StringCalculatorTests: XCTestCase {
     
     func test_add_whenInputContainsNumbersGreaterThan1000_shouldIgnoreThem() {
         XCTAssertEqual(try! sut.add("1,1000,1001"), 1001)
+    }
+    
+    func test_add_whenSingleDelimiterIsDefinedAtFirstLineStartingWithDoubleSlash_shouldBeUsedItToReturnSum() {
+        XCTAssertEqual(try! sut.add("//#\n1#2"), 3)
     }
 }
