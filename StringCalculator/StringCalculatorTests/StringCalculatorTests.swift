@@ -14,7 +14,7 @@ class StringCalculator {
             char == "," || char == "\n"
         }
         let sum = values.reduce(0) { (acc, value) -> Int in
-            return acc + (Int(value) ?? 0)
+            return acc + (Int(value.trimmingCharacters(in: .whitespaces)) ?? 0)
         }
         return sum
     }
@@ -26,22 +26,27 @@ class StringCalculatorTests: XCTestCase {
     
     func test_add_whenInputIsEmptyString_shouldReturnZero() {
         XCTAssertEqual(sut.add(""), 0)
+        XCTAssertEqual(sut.add("  "), 0)
     }
     
     func test_add_whenInputIsSingleNumber_shouldReturnValue() {
         XCTAssertEqual(sut.add("1"), 1)
         XCTAssertEqual(sut.add("2"), 2)
+        XCTAssertEqual(sut.add("3   "), 3)
     }
     
     func test_add_whenInputIsTwoNumberCommaDelimited_shouldReturnSum() {
         XCTAssertEqual(sut.add("1,2"), 3)
+        XCTAssertEqual(sut.add("2  ,  3"), 5)
     }
     
     func test_add_whenInputIsTwoNumberNewLineDelimited_shouldReturnSum() {
         XCTAssertEqual(sut.add("1\n2"), 3)
+        XCTAssertEqual(sut.add("1  \n  2"), 3)
     }
     
     func test_add_whenInputIsThreeNumberDelimitedEitherWay_shouldReturnSum() {
         XCTAssertEqual(sut.add("1\n2,3\n4"), 10)
+        XCTAssertEqual(sut.add(" 1 \n 2 , 3 \n 4 "), 10)
     }
 }
