@@ -22,8 +22,12 @@ enum StringCalculatorError: Error, LocalizedError {
 class StringCalculator {
     
     func add(_ input: String) throws -> Int {
-        let intValues = input.split { $0 == "," || $0 == "\n" }
-            .map { Int($0.trimmingCharacters(in: .whitespaces)) ?? 0 }
+        let intValues: [Int] = input.split {
+            $0 == "," || $0 == "\n"
+        }.compactMap {
+            let value = Int($0.trimmingCharacters(in: .whitespaces)) ?? 0
+            return value <= 1000 ? value : nil
+        }
         let negativeNumbers = intValues.filter({ $0 < 0 })
         guard negativeNumbers.isEmpty else {
             throw StringCalculatorError.nonNegativeNumber(numbers: negativeNumbers)
@@ -71,5 +75,9 @@ class StringCalculatorTests: XCTestCase {
             XCTAssertEqual(values, [-1, -3])
             XCTAssertEqual(error.localizedDescription, "Negatives not allowed: -1,-3")
         }
+    }
+    
+    func test_add_whenInputContainsNumbersGreaterThan1000_shouldIgnoreThem() {
+        XCTAssertEqual(try! sut.add("1,1000,1001"), 1001)
     }
 }
