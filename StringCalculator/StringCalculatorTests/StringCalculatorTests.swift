@@ -10,11 +10,14 @@ import XCTest
 
 enum StringCalculatorError: Error, LocalizedError {
     case nonNegativeNumber(numbers: [Int])
+    case invalidInput
     
     var errorDescription: String? {
         switch self {
         case .nonNegativeNumber(let numbers):
             return "Negatives not allowed: \(numbers.map { String($0) }.joined(separator: ","))"
+        case .invalidInput:
+            return "Invalid input"
         }
     }
 }
@@ -22,10 +25,14 @@ enum StringCalculatorError: Error, LocalizedError {
 class StringCalculator {
     
     func add(_ input: String) throws -> Int {
+        guard !input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            return 0
+        }
         let delimiters = getDelimiters(for: input)
         let stringToSplit = getStringToSplit(from: input)
         let stringValues = stringToSplit.components(separatedBy: delimiters)
-        let validIntValues = filterOutGreaterThan1000(intValues(from: stringValues))
+        let intValuesOrThrow = try intValues(from: stringValues)
+        let validIntValues = filterOutGreaterThan1000(intValuesOrThrow)
         try assertNoNegativesOrThrow(from: validIntValues)
         return validIntValues.reduce(0, +)
     }
@@ -48,10 +55,13 @@ class StringCalculator {
         return string.startIndex...
     }
     
-    private func intValues(from strings: [String]) -> [Int] {
-        return strings.compactMap {
+    private func intValues(from strings: [String]) throws -> [Int] {
+        return try strings.map {
             let string = $0.trimmingCharacters(in: .whitespaces)
-            return string.isEmpty ? 0 : Int(string)
+            guard let value = Int(string) else {
+                throw StringCalculatorError.invalidInput
+            }
+            return value
         }
     }
     
@@ -103,10 +113,10 @@ class StringCalculatorTests: XCTestCase {
         XCTAssertEqual(try! sut.add(" 1 \n 2 , 3 \n 4 "), 10)
     }
         
-    func test_add_whenInputAreNegativeNumbers_shouldThrownNonNegativeNumberException() {
+    func test_add_whenInputAreNegativeNumbers_shouldThrowNonNegativeNumberError() {
         XCTAssertThrowsError(try sut.add("-1,2,-3")) { (error) in
             guard case StringCalculatorError.nonNegativeNumber(let values) = error else {
-                return XCTFail("StringCalculator does not thrown an exception with negative numbers")
+                return XCTFail("StringCalculator does not throw an error for negative numbers")
             }
 
             XCTAssertEqual(values, [-1, -3])
@@ -120,5 +130,15 @@ class StringCalculatorTests: XCTestCase {
     
     func test_add_whenSingleCharDelimiterIsDefinedAtFirstLineStartingWithDoubleSlash_shouldBeUsedItToReturnSum() {
         XCTAssertEqual(try! sut.add("//#\n1#2"), 3)
+    }
+    
+    func test_add_whenInvalidInput_shouldThrowInvalidInputError() {
+        XCTAssertThrowsError(try sut.add("1,\n")) { (error) in
+            guard case StringCalculatorError.invalidInput = error else {
+                return XCTFail("StringCalculator does not throw an error for invalid input")
+            }
+
+            XCTAssertEqual(error.localizedDescription, "Invalid input")
+        }
     }
 }
