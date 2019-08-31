@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E59E6B04231A772100A7A2B8 /* StringCalculator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E59E6AFA231A772000A7A2B8 /* StringCalculator.framework */; };
+		E59E6B15231A774F00A7A2B8 /* StringCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E6B14231A774F00A7A2B8 /* StringCalculatorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +26,7 @@
 		E59E6AFE231A772000A7A2B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E59E6B03231A772000A7A2B8 /* StringCalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StringCalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59E6B0A231A772100A7A2B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E59E6B14231A774F00A7A2B8 /* StringCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringCalculatorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				E59E6B0A231A772100A7A2B8 /* Info.plist */,
+				E59E6B14231A774F00A7A2B8 /* StringCalculatorTests.swift */,
 			);
 			path = StringCalculatorTests;
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 					};
 					E59E6B02231A772000A7A2B8 = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 					};
 				};
 			};
@@ -195,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E59E6B15231A774F00A7A2B8 /* StringCalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +382,7 @@
 		E59E6B12231A772100A7A2B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = StringCalculatorTests/Info.plist;
@@ -387,6 +393,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fabiomignogna.StringCalculatorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -394,6 +401,7 @@
 		E59E6B13231A772100A7A2B8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = StringCalculatorTests/Info.plist;
