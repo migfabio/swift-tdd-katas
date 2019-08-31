@@ -32,8 +32,12 @@ class StringCalculator {
         }
         
         let intValues: [Int] = stringValues.compactMap {
-            let value = Int($0.trimmingCharacters(in: .whitespaces)) ?? 0
-            return value <= 1000 ? value : nil
+            let string = $0.trimmingCharacters(in: .whitespaces)
+            let value = string.isEmpty ? 0 : Int(string)
+            guard let finalValue = value, finalValue <= 1000 else {
+                return nil
+            }
+            return finalValue
         }
         
         let negativeNumbers = intValues.filter({ $0 < 0 })
@@ -91,7 +95,7 @@ class StringCalculatorTests: XCTestCase {
         XCTAssertEqual(try! sut.add("1,1000,1001"), 1001)
     }
     
-    func test_add_whenSingleDelimiterIsDefinedAtFirstLineStartingWithDoubleSlash_shouldBeUsedItToReturnSum() {
+    func test_add_whenSingleCharDelimiterIsDefinedAtFirstLineStartingWithDoubleSlash_shouldBeUsedItToReturnSum() {
         XCTAssertEqual(try! sut.add("//#\n1#2"), 3)
     }
 }
