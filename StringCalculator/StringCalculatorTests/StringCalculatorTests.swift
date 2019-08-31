@@ -40,4 +40,8 @@ class StringCalculatorTests: XCTestCase {
     func test_add_whenInputIsTwoNumberNewLineDelimited_shouldReturnSum() {
         XCTAssertEqual(sut.add("1\n2"), 3)
     }
+    
+    func test_add_whenInputIsThreeNumberDelimitedEitherWay_shouldReturnSum() {
+        XCTAssertEqual(sut.add("1\n2,3\n4"), 10)
+    }
 }
