@@ -22,31 +22,54 @@ enum StringCalculatorError: Error, LocalizedError {
 class StringCalculator {
     
     func add(_ input: String) throws -> Int {
-        var separator = ","
-        if input.hasPrefix("//") {
-            separator = String(input[input.index(input.startIndex, offsetBy: 2)])
+        let delimiters = getDelimiters(for: input)
+        let stringToSplit = getStringToSplit(from: input)
+        let stringValues = stringToSplit.components(separatedBy: delimiters)
+        let validIntValues = filterOutGreaterThan1000(intValues(from: stringValues))
+        try assertNoNegativesOrThrow(from: validIntValues)
+        return validIntValues.reduce(0, +)
+    }
+    
+    private func getDelimiters(for string: String) -> CharacterSet {
+        if string.hasPrefix("//") {
+            return CharacterSet(charactersIn: String(string[2]))
         }
-        
-        let stringValues: [Substring] = input.split {
-            String($0) == separator || String($0) == "\n"
+        return [",", "\n"]
+    }
+    
+    private func getStringToSplit(from string: String) -> String {
+        return String(string[range(for: string)])
+    }
+    
+    private func range(for string: String) -> PartialRangeFrom<String.Index> {
+        if let range = string.range(of: "//.\n", options: [.regularExpression, .anchored]) {
+            return range.upperBound...
         }
-        
-        let intValues: [Int] = stringValues.compactMap {
+        return string.startIndex...
+    }
+    
+    private func intValues(from strings: [String]) -> [Int] {
+        return strings.compactMap {
             let string = $0.trimmingCharacters(in: .whitespaces)
-            let value = string.isEmpty ? 0 : Int(string)
-            guard let finalValue = value, finalValue <= 1000 else {
-                return nil
-            }
-            return finalValue
+            return string.isEmpty ? 0 : Int(string)
         }
-        
-        let negativeNumbers = intValues.filter({ $0 < 0 })
-        
-        guard negativeNumbers.isEmpty else {
-            throw StringCalculatorError.nonNegativeNumber(numbers: negativeNumbers)
+    }
+    
+    private func filterOutGreaterThan1000(_ values: [Int]) -> [Int] {
+        return values.filter { $0 <= 1000 }
+    }
+    
+    private func assertNoNegativesOrThrow(from values: [Int]) throws {
+        let negatives = values.filter({ $0 < 0 })
+        if !negatives.isEmpty {
+            throw StringCalculatorError.nonNegativeNumber(numbers: negatives)
         }
-        
-        return intValues.reduce(0, +)
+    }
+}
+
+extension String {
+    subscript(offset: Int) -> Character {
+        return self[index(startIndex, offsetBy: offset)]
     }
 }
 
