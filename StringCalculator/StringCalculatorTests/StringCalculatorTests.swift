@@ -10,7 +10,9 @@ import XCTest
 
 class StringCalculator {
     func add(_ input: String) -> Int {
-        let values = input.split(separator: ",")
+        let values = input.split { (char) -> Bool in
+            char == "," || char == "\n"
+        }
         let sum = values.reduce(0) { (acc, value) -> Int in
             return acc + (Int(value) ?? 0)
         }
@@ -33,5 +35,9 @@ class StringCalculatorTests: XCTestCase {
     
     func test_add_whenInputIsTwoNumberCommaDelimited_shouldReturnSum() {
         XCTAssertEqual(sut.add("1,2"), 3)
+    }
+    
+    func test_add_whenInputIsTwoNumberNewLineDelimited_shouldReturnSum() {
+        XCTAssertEqual(sut.add("1\n2"), 3)
     }
 }
