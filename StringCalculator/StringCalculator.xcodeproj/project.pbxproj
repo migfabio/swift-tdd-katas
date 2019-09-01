@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E599F135231C08F900A56101 /* StringCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E599F134231C08F900A56101 /* StringCalculator.swift */; };
+		E599F137231C091F00A56101 /* StringCalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E599F136231C091F00A56101 /* StringCalculatorError.swift */; };
+		E599F139231C097100A56101 /* String+StringCalculatorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E599F138231C097100A56101 /* String+StringCalculatorExtensions.swift */; };
 		E59E6B04231A772100A7A2B8 /* StringCalculator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E59E6AFA231A772000A7A2B8 /* StringCalculator.framework */; };
 		E59E6B15231A774F00A7A2B8 /* StringCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E6B14231A774F00A7A2B8 /* StringCalculatorTests.swift */; };
 /* End PBXBuildFile section */
@@ -22,6 +25,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E599F134231C08F900A56101 /* StringCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringCalculator.swift; sourceTree = "<group>"; };
+		E599F136231C091F00A56101 /* StringCalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringCalculatorError.swift; sourceTree = "<group>"; };
+		E599F138231C097100A56101 /* String+StringCalculatorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+StringCalculatorExtensions.swift"; sourceTree = "<group>"; };
 		E59E6AFA231A772000A7A2B8 /* StringCalculator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StringCalculator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59E6AFE231A772000A7A2B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E59E6B03231A772000A7A2B8 /* StringCalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StringCalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +75,9 @@
 		E59E6AFC231A772000A7A2B8 /* StringCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				E599F134231C08F900A56101 /* StringCalculator.swift */,
+				E599F136231C091F00A56101 /* StringCalculatorError.swift */,
+				E599F138231C097100A56101 /* String+StringCalculatorExtensions.swift */,
 				E59E6AFE231A772000A7A2B8 /* Info.plist */,
 			);
 			path = StringCalculator;
@@ -77,8 +86,8 @@
 		E59E6B07231A772100A7A2B8 /* StringCalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
-				E59E6B0A231A772100A7A2B8 /* Info.plist */,
 				E59E6B14231A774F00A7A2B8 /* StringCalculatorTests.swift */,
+				E59E6B0A231A772100A7A2B8 /* Info.plist */,
 			);
 			path = StringCalculatorTests;
 			sourceTree = "<group>";
@@ -144,6 +153,7 @@
 				TargetAttributes = {
 					E59E6AF9231A772000A7A2B8 = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 					};
 					E59E6B02231A772000A7A2B8 = {
 						CreatedOnToolsVersion = 11.0;
@@ -192,6 +202,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E599F135231C08F900A56101 /* StringCalculator.swift in Sources */,
+				E599F137231C091F00A56101 /* StringCalculatorError.swift in Sources */,
+				E599F139231C097100A56101 /* String+StringCalculatorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +349,7 @@
 		E59E6B0F231A772100A7A2B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -352,6 +366,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.fabiomignogna.StringCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -359,6 +374,7 @@
 		E59E6B10231A772100A7A2B8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -382,6 +398,7 @@
 		E59E6B12231A772100A7A2B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -401,6 +418,7 @@
 		E59E6B13231A772100A7A2B8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
