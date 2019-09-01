@@ -31,31 +31,34 @@ class StringCalculator {
         let delimiters = getDelimiters(for: input)
         let stringToSplit = getStringToSplit(from: input)
         let stringValues = stringToSplit.components(separatedBy: delimiters)
-        let intValuesOrThrow = try intValues(from: stringValues)
-        let validIntValues = filterOutGreaterThan1000(intValuesOrThrow)
+        let intValues = try getIntValuesOrThrow(from: stringValues)
+        let validIntValues = filterOutGreaterThan1000(intValues)
         try assertNoNegativesOrThrow(from: validIntValues)
         return validIntValues.reduce(0, +)
     }
     
-    private func getDelimiters(for string: String) -> CharacterSet {
-        if string.hasPrefix("//") {
-            return CharacterSet(charactersIn: String(string[2]))
+    private func getDelimiters(for string: String) -> [String] {
+        if let range = range(for: string) {
+            let delimiterString = string[range]
+            let startIndex = delimiterString.index(delimiterString.startIndex, offsetBy: 2)
+            let endIndex = delimiterString.index(delimiterString.endIndex, offsetBy: -1)
+            return [String(string[startIndex..<endIndex])]
         }
         return [",", "\n"]
     }
     
     private func getStringToSplit(from string: String) -> String {
-        return String(string[range(for: string)])
-    }
-    
-    private func range(for string: String) -> PartialRangeFrom<String.Index> {
-        if let range = string.range(of: "//.\n", options: [.regularExpression, .anchored]) {
-            return range.upperBound...
+        if let range = range(for: string) {
+            return String(string[range.upperBound...])
         }
-        return string.startIndex...
+        return string
     }
     
-    private func intValues(from strings: [String]) throws -> [Int] {
+    private func range(for string: String) -> Range<String.Index>? {
+        return string.range(of: "//.*\n", options: [.regularExpression, .anchored])
+    }
+    
+    private func getIntValuesOrThrow(from strings: [String]) throws -> [Int] {
         return try strings.map {
             let string = $0.trimmingCharacters(in: .whitespaces)
             guard let value = Int(string) else {
@@ -78,8 +81,10 @@ class StringCalculator {
 }
 
 extension String {
-    subscript(offset: Int) -> Character {
-        return self[index(startIndex, offsetBy: offset)]
+    func components(separatedBy separators: [String]) -> [String] {
+        return separators.reduce([self]) { result, separator in
+            return result.flatMap { $0.components(separatedBy: separator) }
+        }
     }
 }
 
@@ -140,5 +145,9 @@ class StringCalculatorTests: XCTestCase {
 
             XCTAssertEqual(error.localizedDescription, "Invalid input")
         }
+    }
+    
+    func test_add_whenMultipleCharDelimiterIsDefinedAtFirstLineStartingWithDoubleSlash_shouldBeUsedItToReturnSum() {
+        XCTAssertEqual(try! sut.add("//###\n1###2"), 3)
     }
 }
