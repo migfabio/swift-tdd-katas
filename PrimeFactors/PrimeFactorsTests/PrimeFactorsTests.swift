@@ -64,6 +64,11 @@ class PrimeFactorsTests: XCTestCase {
         assertThatPrimeFactorsOf(9, isEqualTo: [3,3])
     }
     
+    func test_generate_acceptanceTest() {
+        let n = 2*2*3*3*5*7*11
+        assertThatPrimeFactorsOf(n, isEqualTo: [2,2,3,3,5,7,11])
+    }
+    
     // MARK: Helpers
     
     private func assertThatPrimeFactorsOf(_ input: Int, isEqualTo expected: [Int], file: StaticString = #file, line: UInt = #line) {
