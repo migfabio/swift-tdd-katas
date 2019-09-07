@@ -9,17 +9,18 @@
 import XCTest
 
 class PrimeFactors {
+    
     func generate(_ n: inout Int) -> [Int] {
-        var output = [Int]()
-        var p = 2
+        var factors = [Int]()
+        var divisor = 2
         while n > 1 {
-            while n % p == 0 {
-                output.append(p)
-                n /= p
+            while n % divisor == 0 {
+                factors.append(divisor)
+                n /= divisor
             }
-            p += 1
+            divisor += 1
         }
-        return output
+        return factors
     }
 }
 
