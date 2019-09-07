@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E5473B542324425A008D5C97 /* PrimeFactors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5473B4A2324425A008D5C97 /* PrimeFactors.framework */; };
+		E5473B6523244287008D5C97 /* PrimeFactorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5473B6423244287008D5C97 /* PrimeFactorsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +26,7 @@
 		E5473B4E2324425A008D5C97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5473B532324425A008D5C97 /* PrimeFactorsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrimeFactorsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5473B5A2324425A008D5C97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5473B6423244287008D5C97 /* PrimeFactorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeFactorsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 		E5473B572324425A008D5C97 /* PrimeFactorsTests */ = {
 			isa = PBXGroup;
 			children = (
+				E5473B6423244287008D5C97 /* PrimeFactorsTests.swift */,
 				E5473B5A2324425A008D5C97 /* Info.plist */,
 			);
 			path = PrimeFactorsTests;
@@ -144,6 +147,7 @@
 					};
 					E5473B522324425A008D5C97 = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 					};
 				};
 			};
@@ -195,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5473B6523244287008D5C97 /* PrimeFactorsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +382,7 @@
 		E5473B622324425A008D5C97 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = PrimeFactorsTests/Info.plist;
@@ -387,6 +393,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fabiomignogna.PrimeFactorsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -394,6 +401,7 @@
 		E5473B632324425A008D5C97 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = PrimeFactorsTests/Info.plist;
