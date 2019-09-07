@@ -11,7 +11,7 @@ import XCTest
 class PrimeFactors {
     func generate(_ input: Int) -> [Int] {
         if input > 1 {
-            return [2]
+            return [input]
         }
         return []
     }
@@ -27,5 +27,9 @@ class PrimeFactorsTests: XCTestCase {
     
     func test_generate_with2AsInput_shouldReturn_2() {
         XCTAssertEqual(sut.generate(2), [2])
+    }
+    
+    func test_generate_with3AsInput_shouldReturn_3() {
+        XCTAssertEqual(sut.generate(3), [3])
     }
 }
