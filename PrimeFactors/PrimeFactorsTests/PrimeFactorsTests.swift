@@ -11,14 +11,13 @@ import XCTest
 class PrimeFactors {
     func generate(_ n: inout Int) -> [Int] {
         var output = [Int]()
-        if n > 1 {
-            while n % 2 == 0 {
-                output.append(2)
-                n /= 2
+        var p = 2
+        while n > 1 {
+            while n % p == 0 {
+                output.append(p)
+                n /= p
             }
-            if n > 1 {
-                output.append(n)
-            }
+            p += 1
         }
         return output
     }
@@ -58,6 +57,10 @@ class PrimeFactorsTests: XCTestCase {
     
     func test_generate_with8AsInput_shouldReturn_2_2_2() {
         assertThatPrimeFactorsOf(8, isEqualTo: [2,2,2])
+    }
+    
+    func test_generate_with9AsInput_shouldReturn_3_3() {
+        assertThatPrimeFactorsOf(9, isEqualTo: [3,3])
     }
     
     // MARK: Helpers
