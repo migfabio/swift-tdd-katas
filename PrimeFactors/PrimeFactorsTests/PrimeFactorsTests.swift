@@ -48,6 +48,10 @@ class PrimeFactorsTests: XCTestCase {
         assertThatPrimeFactorsOf(5, isEqualTo: [5])
     }
     
+    func test_generate_with6AsInput_shouldReturn_2_3() {
+        assertThatPrimeFactorsOf(6, isEqualTo: [2,3])
+    }
+    
     // MARK: Helpers
     
     private func assertThatPrimeFactorsOf(_ input: Int, isEqualTo expected: [Int], file: StaticString = #file, line: UInt = #line) {
